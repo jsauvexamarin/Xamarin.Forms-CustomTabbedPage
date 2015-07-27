@@ -1,16 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CustomTabBar
 {
-    public class CustomTabbedContentViewModel
+    public class CustomTabbedContentViewModel : INotifyPropertyChanged
     {
-        public List<TabContentItem> Items = new List<TabContentItem>()
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        List<TabContentItem> items;
+        public List<TabContentItem> Items
         {
-            new TabContentItem("One"),
-            new TabContentItem("Two"),
-            new TabContentItem("Three")
-        };
+            get
+            {
+                return items;
+            }
+            set
+            {
+                items = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Items"));
+            }
+        }
+
+        public CustomTabbedContentViewModel ()
+        {
+            Items = new List<TabContentItem>
+                {
+                    new TabContentItem("One"),
+                    new TabContentItem("Two"),
+                    new TabContentItem("Three")
+                };
+        }
+
     }
 }
 

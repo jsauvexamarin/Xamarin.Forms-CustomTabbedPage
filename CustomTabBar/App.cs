@@ -10,7 +10,13 @@ namespace CustomTabBar
         public App()
         {
             // The root page of your application
-            MainPage = new CustomTabbedPage(new CustomTabbedContentViewModel() );
+            var tabPage = new CustomTabbedPage();
+
+            MainPage = tabPage;
+
+            tabPage.BindingContext = new CustomTabbedContentViewModel();
+
+            tabPage.SetBinding(CustomTabbedPage.ItemSourceProperty, new Binding("Items", BindingMode.OneWay));
         }
 
         protected override void OnStart()
