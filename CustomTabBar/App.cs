@@ -14,9 +14,13 @@ namespace CustomTabBar
 
             MainPage = tabPage;
 
-            tabPage.BindingContext = new CustomTabbedContentViewModel();
+            tabPage.BindingContext = new CustomTabbedContentViewModel()
+            {
+//                TabBarPosition = TabBarPosition.Bottom
+            };
 
             tabPage.SetBinding(CustomTabbedPage.ItemSourceProperty, new Binding("Items", BindingMode.OneWay));
+            tabPage.SetBinding(CustomTabbedPage.TabBarPostionProperty, new Binding("TabBarPosition", BindingMode.OneWay));
         }
 
         protected override void OnStart()
